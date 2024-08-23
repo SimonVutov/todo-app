@@ -1,14 +1,32 @@
 body, html {
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
   overflow-x: hidden;
 }
 
-.container {
+#root {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  padding: 10px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+button {
+  margin-top: 10px;
 }

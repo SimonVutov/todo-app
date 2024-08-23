@@ -100,7 +100,7 @@ const App: React.FC = () => {
 
   return (
     <div
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex justify-content-center" // align-items-center makes vertical alignment
       style={{ height: "100vh", width: "100vw" }}
     >
       <div className="text-center" style={{ maxWidth: "600px", width: "100%" }}>
