@@ -1,18 +1,34 @@
 import React, { useState } from "react";
-//import { Task } from "../types";
-//comment
 
 interface Props {
-  addTask: (name: string) => void;
+  addTask: (
+    name: string,
+    priority: "low" | "medium" | "high",
+    dueDate: Date
+  ) => void;
 }
 
 const TaskInput: React.FC<Props> = ({ addTask }) => {
   const [input, setInput] = useState("");
+  const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [dueDate, setDueDate] = useState<string>(() => {
+    const today = new Date().toISOString().split("T")[0];
+    return today;
+  });
 
   const handleAdd = () => {
     if (input.trim() !== "") {
-      addTask(input);
+      const dateParts = dueDate.split("-");
+      const dateObject = new Date(
+        Number(dateParts[0]),
+        Number(dateParts[1]) - 1,
+        Number(dateParts[2]),
+        12
+      ); // Set time to noon to avoid timezone issues
+      addTask(input, priority, dateObject);
       setInput("");
+      setPriority("medium");
+      setDueDate(new Date().toISOString().split("T")[0]); // Reset to today
     }
   };
 
@@ -25,11 +41,24 @@ const TaskInput: React.FC<Props> = ({ addTask }) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button
-        className="btn btn-outline-secondary"
-        type="button"
-        onClick={handleAdd}
+      <select
+        className="form-select"
+        value={priority}
+        onChange={(e) =>
+          setPriority(e.target.value as "low" | "medium" | "high")
+        }
       >
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <input
+        type="date"
+        className="form-control"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+      />
+      <button className="btn btn-dark" type="button" onClick={handleAdd}>
         Add
       </button>
     </div>
