@@ -58,7 +58,11 @@ const TaskInput: React.FC<Props> = ({ addTask }) => {
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
-      <button className="btn btn-dark" type="button" onClick={handleAdd}>
+      <button
+        className="btn btn-outline-dark"
+        type="button"
+        onClick={handleAdd}
+      >
         Add
       </button>
     </div>
